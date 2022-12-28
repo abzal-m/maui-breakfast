@@ -62,9 +62,21 @@
                                     <FlexLayout Wrap="Wrap"
                                                 Grid.Row="1"
                                                 AlignItems="Start">
-                                        <Label Text="Tomorrow, 8:00 - 11:00"
+                                        <Label Text="{Binding StartDateTime,
+                                            Converter={StaticResource DateTimeToBreakfastDayConverter}}"
                                            FontSize="16"
                                            Grid.Row="1"/>
+                                        <Label Text=", "/>
+                                        <Label Text="{Binding StartDateTime,
+                                            Converter={StaticResource DateTimeToTimeConverter}}"
+                                           FontSize="16"
+                                           Grid.Row="1"/>
+                                        <Label Text=" - "/>
+                                        <Label Text="{Binding EndDateTIme,
+                                            Converter={StaticResource DateTimeToTimeConverter}}"
+                                           FontSize="16"
+                                           Grid.Row="1"/>
+                                        
 
                                     </FlexLayout>
 
