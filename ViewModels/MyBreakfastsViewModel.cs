@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using MauiBreakfast.Models;
+using System.Threading.Tasks;
 
 namespace MauiBreakfast.ViewModels;
 
@@ -8,14 +10,20 @@ public partial class MyBreakfastsViewModel : ObservableObject
     [ObservableProperty]
     List<Breakfast> breakfasts;
 
+    [ObservableProperty]
+    bool isRefreshing;
+
     public MyBreakfastsViewModel()
     {
-        LoadBreakfasts();
+        LoadBreakfastsAsync();
     }
-
-    private void LoadBreakfasts()
+    [RelayCommand]
+    public async Task LoadBreakfastsAsync()
     {
-        Breakfasts = new()
+        try
+        {
+            await Task.Delay(2000);
+            Breakfasts = new()
             {
                 new Breakfast(
                     Name: "Vegan Sunshine",
@@ -34,6 +42,11 @@ public partial class MyBreakfastsViewModel : ObservableObject
                     Savory: new List<string>{ "Oatmeal", "Avacado Toast", "Omlet", "Salad" },
                     Sweet: new List<string>{"Salad"})
             };
+        }
+        finally
+        {
+            IsRefreshing = false;
+        }
     }
 }
 
